@@ -4,9 +4,7 @@ published: true
 tags: [linux, qt]
 ---
 
-The Qt 5.12 beta was just released:
-
-http://blog.qt.io/blog/2018/10/05/qt-5-12-lts-beta-released/
+The Qt 5.12 beta was just [released](http://blog.qt.io/blog/2018/10/05/qt-5-12-lts-beta-released/)
 
 I fed this beta to my qt-sdk-raspberry-pi [aur](https://www.chaos-reins.com/qpi/#aur-recipes) recipe, and:
 
