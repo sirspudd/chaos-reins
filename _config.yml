@@ -4,6 +4,7 @@ description: San Francisco based Qt/Linux Experts for hire
 url: "http://www.chaos-reins.com" 
 repository: git@github.com:sirspudd/sirspudd.github.io.git
 timezone: America/Los_Angeles
+disqus: "sspdd"
 twitter:
   username: sirspudd
 logo: "/img/avatar-icon.jpg"
