@@ -10,6 +10,9 @@ layout: default
         <h1>{{ page.title }}</h1>
         {{ content }}
       </article>
+      <div class="disqus-comments">
+        {% include disqus.html %}
+      </div>
     </div>
 
     <div class="clear"></div>
