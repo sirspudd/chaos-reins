@@ -413,6 +413,32 @@ libinput is great too, but it was excluded from this build due to muppetry on my
 
 Once this was accomplished, Qt (base and declarative) built successfully, and I could successfully compile/deploy my application to the tool and run it sans X11.
 
+# interest
+## thermals
+
+The device does get hot running my art application:
+
+```
+root@boombox:~# cat /sys/kernel/debug/soctherm/cpu/temp
+74500
+root@boombox:~# cat /sys/kernel/debug/soctherm/gpu/temp
+73500
+root@boombox:~# cat /sys/kernel/debug/soctherm/mem/temp
+74500
+root@boombox:~# cat /sys/kernel/debug/soctherm/pll/temp
+71000
+root@boombox:~# sensors
+thermal-fan-est-virtual-0
+Adapter: Virtual device
+temp1:        +74.0°C
+```
+
+Nvidia's thermal design guide:
+
+https://developer.download.nvidia.com/assets/embedded/secure/jetson/Nano/docs/Jetson_Nano_Thermal_Design_Guide.pdf?aSH8MZC4et2iweqxWEN0qG6qYpnibw27V4CQYp7TNqUao0yf_VoGOpdk4WWjz6MT96TBt4ywjPEzfCJtSyMKT2gbryx40jIWGalsxmTeY8NJzlgavrD-r240-UZYfxazDqBVHQ4utI-R6o8NO24RCE7OLYmzqBZXZJ3RLjHfCbIXA_ivFPPyfZyt2w
+
+Does give one the impression that I have another 25 degrees celsius of head room before shit gets critical.
+
 # ugly
 
 ```
