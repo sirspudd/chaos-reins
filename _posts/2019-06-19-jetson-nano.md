@@ -4,6 +4,8 @@ published: true
 tags: [linux, qt, nvidia, jetson, artriculate]
 ---
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hxTvs5CSIS4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 # Goals
 
 * Getting Qt running on the jetson-nano without X11
