@@ -15,14 +15,13 @@ tags: [linux, qt, nvidia, jetson, artriculate]
 # TL&DR
 
 * Pros
-    * Glorious kit
-    * My application running at 4K@60fps _out of the box_ when I had personally blamed myself (and joylessly pursued) 1080p@60fps on the raspberry pi (proprietary and vc4 drm)
+    * Glorious kit; I have grown so accustom to the vc4 (raspberry pi) and ARM Mali devices, that I am blown out of the water by the performance of this hardware, and the fact the drivers largely just work *golf clap* and work well. My application runs at 4K@60fps _out of the box_ when I had personally blamed myself (and joylessly pursued) 1080p@60fps on the raspberry pi (proprietary and vc4 drm)
 * Gotchas
     * toolchains ate my face
     * Configuring Qt (and the associated mkspec) ate my face
     * Updating the image took me back several configuration steps
     * They actually ship weston along with their binary drivers, so using it as fair Wayland reference was actually moot. #JustAnotherOpaqueBinary
-    * That heat sink aint there for outrageous loads
+    * That heat sink aint there for outrageous loads; my app was sufficient to make it cook
 
 # Shout outs
 
