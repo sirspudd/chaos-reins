@@ -24,19 +24,19 @@ tags: [linux, qt, nvidia, jetson, artriculate]
 
 # Shout outs
 
-* (https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano)[https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano] (for documenting a bunch of valuable otherwise painful to earn/aggregate; and potentially a Yocto channel)
+* [https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano](https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano) (for documenting a bunch of valuable otherwise painful to earn/aggregate; and potentially a Yocto channel)
 * The Qt peeps who have been publicly blogging about their active use of Nvidia targets and making them pretty easy to bring up
 
 # All you need
 
-* https://github.com/sirspudd/mkspecs/blob/master/linux-jetson-nano-g%2B%2B/qmake.conf
-* https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain
+* [https://github.com/sirspudd/mkspecs/blob/master/linux-jetson-nano-g%2B%2B/qmake.conf](https://github.com/sirspudd/mkspecs/blob/master/linux-jetson-nano-g%2B%2B/qmake.conf)
+* [https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain](https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain)
 * An adequate Qt source bundle, I tend to live on the bleeding edge of things
-* Optional: https://github.com/sirspudd/qt-sdk-raspberry-pi (aur recipe I use to build target centric sdks for Arch; read bash script to the uninitiated)
+* Optional: [https://github.com/sirspudd/qt-sdk-raspberry-pi](https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano) (aur recipe I use to build target centric sdks for Arch; read bash script to the uninitiated)
 
 # Bring up
 
-Grabbed the only game (OS image) in town: (LFT)[https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup]
+Grabbed the only game (OS image) in town: [LFT](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup)
 Booted into L4T
 enabled NFS (for my dev flow)
 
@@ -361,8 +361,8 @@ I have worked on mom&pop projects with 1 user where you package assets and spin 
 
 # Further reading/resources
 
-* https://blog.qt.io/blog/2016/09/19/qt-graphics-with-multiple-displays-on-embedded-linux/ (The Qt blog is generally great and people like Laszlo Agocs are actively improving/extending Qt on any embedded device with a GPU and actively sharing insights on said blog; saves you time and sheds direct light into an otherwise arcane area)
-* https://blog.qt.io/blog/2016/11/10/qt-nvidia-jetson-tx1-device-creation-style/
-* https://developer.nvidia.com/embedded/linux-tegra (Where I got the functional toolchain)
-* https://doc.qt.io/qt-5/embedded-linux.html#eglfs-with-eglfs-kms-backend (Such glorious docs)
-* https://rudd-o.com/linux-and-free-software/how-to-make-pulseaudio-run-once-at-boot-for-all-your-users (I have had to find this page so many times; install shairport-sync and you now have an airport sound sink #ItJustDuckingWorks)
+* [https://blog.qt.io/blog/2016/09/19/qt-graphics-with-multiple-displays-on-embedded-linux/](https://blog.qt.io/blog/2016/09/19/qt-graphics-with-multiple-displays-on-embedded-linux/) (The Qt blog is generally great and people like Laszlo Agocs are actively improving/extending Qt on any embedded device with a GPU and actively sharing insights on said blog; saves you time and sheds direct light into an otherwise arcane area)
+* [https://blog.qt.io/blog/2016/11/10/qt-nvidia-jetson-tx1-device-creation-style/](https://blog.qt.io/blog/2016/11/10/qt-nvidia-jetson-tx1-device-creation-style/)
+* [https://developer.nvidia.com/embedded/linux-tegra](https://developer.nvidia.com/embedded/linux-tegra) (Where I got the functional toolchain)
+* [https://doc.qt.io/qt-5/embedded-linux.html#eglfs-with-eglfs-kms-backend](https://doc.qt.io/qt-5/embedded-linux.html#eglfs-with-eglfs-kms-backend) (Such glorious docs)
+* [https://rudd-o.com/linux-and-free-software/how-to-make-pulseaudio-run-once-at-boot-for-all-your-users](https://rudd-o.com/linux-and-free-software/how-to-make-pulseaudio-run-once-at-boot-for-all-your-users) (I have had to find this page so many times; install shairport-sync and you now have an airport sound sink #ItJustDuckingWorks)
