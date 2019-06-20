@@ -24,7 +24,7 @@ tags: [linux, qt, nvidia, jetson, artriculate]
 
 # Shout outs
 
-* https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano (for documenting a bunch of valuable otherwise painful to earn/aggregate; and potentially a Yocto channel)
+* (https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano)[https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano] (for documenting a bunch of valuable otherwise painful to earn/aggregate; and potentially a Yocto channel)
 * The Qt peeps who have been publicly blogging about their active use of Nvidia targets and making them pretty easy to bring up
 
 # All you need
