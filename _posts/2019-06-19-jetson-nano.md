@@ -87,7 +87,83 @@ Started cobbling together a jetson-nano Qt mkspec from the existing Nvidia ones
 
 Success! Your toolchain can compile binaries and does not explode in a plethora of unreadable error messages about a wealth of issues. (The most interesting being a disagreement about native primate integer types.
 
-This cost me around 3-4 hours of my thirties and I will bite someone if I ever find an assailant other than my own shitty choice of hobbies.
+This toolchain hopping cost me around 3-4 hours of my thirties and I will bite someone if I ever find an assailant other than my own shitty choice of hobbies.
+
+The final mkspec looks so:
+
+```
+#
+# qmake configuration for the Jetson TK1 boards running Linux For Tegra
+#
+# Note that this environment has been tested with X11 only.
+#
+# A typical configure line might look like:
+# configure \
+#   -device linux-jetson-tk1-g++ \
+#   -device-option CROSS_COMPILE=/opt/nvidia/toolchains/tegra-4.8.1-nv/usr/bin/arm-cortex_a15-linux-gnueabi/arm-cortex_a15-linux-gnueabi- \
+#   -sysroot /opt/nvidia/l4t/targetfs
+
+include(../common/linux_device_pre.conf)
+
+QMAKE_INCDIR_POST += \
+    $$[QT_SYSROOT]/usr/include/$${GCC_MACHINE_DUMP}
+
+QMAKE_LIBDIR_POST += \
+    $$[QT_SYSROOT]/usr/lib \
+    $$[QT_SYSROOT]/lib/$${GCC_MACHINE_DUMP} \
+    $$[QT_SYSROOT]/usr/lib/$${GCC_MACHINE_DUMP}
+
+QMAKE_RPATHLINKDIR_POST += \
+    $$[QT_SYSROOT]/usr/lib \
+    $$[QT_SYSROOT]/usr/lib/$${GCC_MACHINE_DUMP} \
+    $$[QT_SYSROOT]/lib/$${GCC_MACHINE_DUMP}
+
+DISTRO_OPTS += aarch64
+# gcc -march=native -Q --help=target
+COMPILER_FLAGS               += -march=armv8-a+crypto+crc
+# -mstrict-align
+
+EGLFS_DEVICE_INTEGRATION = eglfs_kms_egldevice
+
+include(../common/linux_arm_device_post.conf)
+load(qt_config)
+```
+
+The crux is:
+
+```
+include(../common/linux_device_pre.conf)
+
+# deb-multi-arch madness
+QMAKE_INCDIR_POST += \
+    $$[QT_SYSROOT]/usr/include/$${GCC_MACHINE_DUMP}
+
+QMAKE_LIBDIR_POST += \
+    $$[QT_SYSROOT]/usr/lib \
+    $$[QT_SYSROOT]/lib/$${GCC_MACHINE_DUMP} \
+    $$[QT_SYSROOT]/usr/lib/$${GCC_MACHINE_DUMP}
+
+QMAKE_RPATHLINKDIR_POST += \
+    $$[QT_SYSROOT]/usr/lib \
+    $$[QT_SYSROOT]/usr/lib/$${GCC_MACHINE_DUMP} \
+    $$[QT_SYSROOT]/lib/$${GCC_MACHINE_DUMP}
+# end: deb-multi-arch madness
+
+# Qt is gonna hurt you if you dont supply this for aarch64 targets
+DISTRO_OPTS += aarch64
+# end: Qt is gonna hurt you if you dont supply this for aarch64 targets
+
+# sane baseline CXXFLAG
+COMPILER_FLAGS               += -march=armv8-a+crypto+crc
+# end: sane baseline CXXFLAG
+
+# use eglfs + egldevice not X11 by default
+EGLFS_DEVICE_INTEGRATION = eglfs_kms_egldevice
+# end: use eglfs + egldevice not X11 by default
+
+include(../common/linux_arm_device_post.conf)
+load(qt_config)
+```
 
 Groovy; you can compile binaries but are you gonna get what you want. Probably not. The next step is configure Qt repeatedly until you see the functionality you want get detected and pass initial inspection. This is gloriously complicated by the fact that this is an Ubuntu image and they use the multiarch arrangement, which means an agnostic toolchain is toast until you enlighten it as to where to look.
 
