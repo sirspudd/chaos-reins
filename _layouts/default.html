@@ -1,17 +1,9 @@
-{% include top.html %}
+---
+layout: base
+---
 
-<body class="wrap">
-  {% include header.html %}
+<div class="intro-header"></div>
 
+<div role="main" class="container">
   {{ content }}
-
-  <div class="disqus-comments">
-    {% include disqus.html %}
-  </div>
-
-  {% include footer.html %}
-  {% include anchor_links.html %}
-  {% include analytics.html %}
-  {% include search/script.html %}
-</body>
-</html>
+</div>
