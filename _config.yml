@@ -22,7 +22,7 @@ url: "http://www.chaos-reins.com"
 # List of links in the navigation bar
 navbar-links:
   About Me: "about"
-  Links: "links"
+  Media: "media"
   Projects:
     - QPI: "qpi"
     - QCEC: "qcec"
