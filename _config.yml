@@ -1,10 +1,10 @@
 # --- General options --- #
 
 # Name of website
-title: My website
+title: Chaos Reins
 
 # Short description of your site
-description: A virtual proof that I'm awesome
+description: San Francisco based Qt/Linux Experts for hire
 
 # --- Local development options ---
 # If your website is hosted locally rather than on GitHub, then you need to uncomment the next two parameters to set the url and baseurl
@@ -12,6 +12,7 @@ description: A virtual proof that I'm awesome
 
 # url is the the website domain URL without a trailing slash
 #url: "https://example.com"
+url: "http://www.chaos-reins.com"
 
 # baseurl should be an empty string
 #baseurl: ""
@@ -59,8 +60,6 @@ footer-link-col: "#404040"
 
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
-author:
-  name: Some Person
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
@@ -68,12 +67,12 @@ author:
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
   rss: true
-  email: "someone@example.com"
-  facebook: deanattali
-  github: daattali
-  twitter: daattali
+  email: "d@chaos-reins.com"
+#  facebook: deanattali
+  github: sirspudd
+#  twitter: daattali
 #  reddit: yourname
-#  linkedin: daattali
+  linkedin: donald-carr-0131754
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
@@ -88,12 +87,11 @@ social-network-links:
 # Select which share links to show in posts
 share-links-active:
   twitter: true
-  facebook: true
   linkedin: true
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "www.chaos-reins.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Web Statistics Section --- #
 
@@ -102,6 +100,7 @@ url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # Fill in your Google Analytics ID to track your website using GA
 #google_analytics: ""
+google_analytics_id: UA-50755011-1
 
 # Google Tag Manager ID
 #gtm: ""
@@ -119,6 +118,7 @@ url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
 # disqus: ""
+disqus: "sspdd"
 
 # If you want to use JustComments fill with the API Key
 #just-comments: "ABCD-EFGH-IJKL"
@@ -152,6 +152,20 @@ title-separator: "-"
 
 # Ruby Date Format
 date_format: "%B %-d, %Y"
+
+#+timezone: America/Los_Angeles
+#+twitter:
+#+  username: sirspudd
+#+logo: "/img/avatar-icon.jpg"
+#+collections:
+#+  docs:
+#+    permalink: "/:collection/:path/"
+#+    output: true
+#+  posts:
+#+    permalink: "/:year-:month-:day-:title/"
+#+    output: true
+#+  tutorials:
+#+    output: true
 
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
