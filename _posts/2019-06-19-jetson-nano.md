@@ -83,7 +83,7 @@ Started cobbling together a jetson-nano Qt mkspec from the existing Nvidia ones
 * Tried aarch64 toolchain directly from ARM
 * Went back in time, tried aarch64 toolchain from Linaro
 * Tried toolchain from Nvidia on their jetson-nano page
-* Tried older (gcc-linaro-7.1.1-2017.08-x86_64_arm-linux-gnueabihf toolchain from jetson-nano page.)[https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain]
+* Tried older [gcc-linaro-7.1.1-2017.08-x86_64_arm-linux-gnueabihf toolchain from jetson-nano page.](https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain)
 
 Success! Your toolchain can compile binaries and does not explode in a plethora of unreadable error messages about a wealth of issues. (The most interesting being a disagreement about native primate integer types.
 
