@@ -33,7 +33,7 @@ tags: [linux, qt, nvidia, jetson, artriculate]
 * [https://github.com/sirspudd/mkspecs/blob/master/linux-jetson-nano-g%2B%2B/qmake.conf](https://github.com/sirspudd/mkspecs/blob/master/linux-jetson-nano-g%2B%2B/qmake.conf)
 * [https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain](https://developer.nvidia.com/embedded/dlc/kernel-gcc-6-4-tool-chain)
 * An adequate Qt source bundle, I tend to live on the bleeding edge of things
-* Optional: [https://github.com/sirspudd/qt-sdk-raspberry-pi](https://github.com/madisongh/meta-tegra/wiki/Wayland-Weston-support-on-TX1-TX2-Xavier-Nano) (aur recipe I use to build target centric sdks for Arch; read bash script to the uninitiated)
+* Optional: [https://github.com/sirspudd/qt-sdk-raspberry-pi/blob/master/PKGBUILD](https://github.com/sirspudd/qt-sdk-raspberry-pi/blob/master/PKGBUILD) (aur recipe I use to build target centric sdks for Arch; read bash script to the uninitiated)
 
 # Bring up
 
