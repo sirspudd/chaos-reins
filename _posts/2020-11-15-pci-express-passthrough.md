@@ -165,9 +165,7 @@ Let me preface this by stating that I probably harbour a lot of misinformation a
 
 * I ignored enlightenments for too long going through and enabling just about all of [them](https://github.com/kubevirt/kubevirt/issues/1919) really helped
 * My clock configuration was initially such that my machine burned 60% of a core when Windows was entirely idle (steam closed); enlightments + hyperv clocking considerations had a marked impact on the idle behavior of my Windows client and baseline CPU load
-* I enabled TLP, which on current inspection appear to be heavily used by chromium and not my Windows VM. Whoops.
-
-Thank you (redhat)[https://access.redhat.com/solutions/46111]
+* I enabled TLP, which on current inspection appear to be heavily used by chromium and not my Windows VM. Whoops. Thank you (Redhat)[https://access.redhat.com/solutions/46111]. I went through multiple iterations of this, and it was certainly interesting to explore this kind of space. Now that I am using madvise for transparent pages as opposed to always, my Windows box is getting the TLP love I intended; I will update this blog if there is substantial change.
 
 ```
 awk  '/AnonHugePages/ { if($2>4){print FILENAME " " $0; system("ps -fp " gensub(/.*\/([0-9]+).*/, "\\1", "g", FILENAME))}}' /proc/*/smaps
@@ -409,3 +407,13 @@ Here is my current libvirt configuration for my Windows box; virsh dumpxml --ina
 * redhat for advancing this stuff and for producing some kickass documentation; I am not a fanboy of the company, but I ride the Linux sleigh and I know damn well who is pulling this sled.
 * Hitting left ctrl + right ctrl, changing HDMI inputs and gaming on Windows like it was a tangible external box.
 * Having Windows consume 30% of a single core on a 16 physical core machine for the luxury to Windows game on demand.
+
+# What this looks like
+
+A qemu process which is bolted to the cores specified in the configuration above; the CPU usage ranges from 30% when ideal to full use of the alloted cores when gaming or under load. I ceased to pin the emulator to cores as I have more faith in the system scheduler than I have in me.
+
+Hours spent tinkering with passthrough to date: ~30 hours
+
+# What happens when you get things wrong
+
+Stuttering and popping like you have never seen before. I am impressed by people who record and investigate IRQ behavior and interrupt handling; I personally have yet to get a firm grip on what the reality of this looks like with my current configuration. I have gamed on some incredibly poxy Windows installs now, tolerating shit no functional adult should tolerate.
