@@ -153,7 +153,7 @@ done;
 
 I am using a quad channel setup with my threadripper, which means my machines physical topology looks like this via (lstopo -p):
 
-![lstopo -p](topology.png)
+![lstopo -p](2020-11-15-pci-express-passthrough/topology.png)
 
 # Performance considerations
 
