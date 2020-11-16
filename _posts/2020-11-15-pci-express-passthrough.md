@@ -153,15 +153,25 @@ done;
 
 I am using a quad channel setup with my threadripper, which means my machines physical topology looks like this via (lstopo -p):
 
-![lstopo -p](2020-11-15-pci-express-passthrough/topology.png)
+![lstopo -p](/img/topology.png)
+
+what is noteworthy here is that my GPU 0d:00:00 is on numa node 0; therefore my memory needs to be allocated here. In an ideal world, all peripherals would be attached to this node, but one does not get to choose how these things are represented.
+
+One thing which I believe warrants mentioning is that changes in your EFI can entirely change this bus enumeration, and for instance, while playing with values to get my TR to clock up to 3.7/4.0 ghz when boosting I managed to entirely reset my peripheral configuration, which required me to reselect the cpu cores backing my virtual cores, numatune memory location etc etc.
 
 # Performance considerations
 
 Let me preface this by stating that I probably harbour a lot of misinformation as to what makes or breaks PCIE 
 
-* I ignored enlightenments for too long going through and enabling just about all of [https://github.com/kubevirt/kubevirt/issues/1919] really helped
+* I ignored enlightenments for too long going through and enabling just about all of [them](https://github.com/kubevirt/kubevirt/issues/1919) really helped
 * My clock configuration was initially such that my machine burned 60% of a core when Windows was entirely idle (steam closed); enlightments + hyperv clocking considerations had a marked impact on the idle behavior of my Windows client and baseline CPU load
+* I enabled TLP, which on current inspection appear to be heavily used by chromium and not my Windows VM. Whoops.
 
+Thank you (redhat)[https://access.redhat.com/solutions/46111]
+
+```
+awk  '/AnonHugePages/ { if($2>4){print FILENAME " " $0; system("ps -fp " gensub(/.*\/([0-9]+).*/, "\\1", "g", FILENAME))}}' /proc/*/smaps
+```
 
 # Final libvirt configuration file
 
@@ -388,3 +398,14 @@ Here is my current libvirt configuration for my Windows box; virsh dumpxml --ina
   </qemu:commandline>
 </domain>
 ```
+
+# What sucks
+
+1. I was dumb enough to buy an AMD Radeon VII; this mean's my Windows box can't reboot without my Linux host rebooting. I literally can't reset the GPU. AMD can't reset the GPU. The only difference is I give a fuck. This is a clusterfuck of the highest order; I purchased a $700 card, and it made rebooting my Windows host lightly impossible. Lots of similar PCI express issues have been hit and fixed for the more widely owned cards, you just need to google your cards status ahead of time. This hits every Windows update and if your GPU driver reboots a couple times, god help you. It warrants mentioning that both AMD and Nvidia apparently behave differently if they detect they are running in a VM, doing things like blocking you installing your AMD cards driver, or disabling functionality. Fuck these clowns, god bless enlightments: \<vendor_id state='on' value='banana'/\>
+2. VR; part of the reason I still want Windows when Proton exists, is to allow me to use my Oculus Rift. This was still tempremental last time I attempted to use it, and I don't know how much to attribute this to their problematic software, or my scrubby passthrough arrangement.
+
+# What rocks
+
+* redhat for advancing this stuff and for producing some kickass documentation; I am not a fanboy of the company, but I ride the Linux sleigh and I know damn well who is pulling this sled.
+* Hitting left ctrl + right ctrl, changing HDMI inputs and gaming on Windows like it was a tangible external box.
+* Having Windows consume 30% of a single core on a 16 physical core machine for the luxury to Windows game on demand.
