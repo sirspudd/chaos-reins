@@ -9,7 +9,7 @@ tags: [linux, oss, Windows, games, graphical acceleration]
 
 * PCIE pass-through is lovely; who does not want Windows as an appliance; a Windows guest gremlin confined to a box where is can serve the only purpose Windows has every served; a life support system for games from the last 30 years.
 * It is easy to incur overhead when you try to set up PCIE pass-through; you better enjoy tinkering, because you will be doing a lot of it
-* libvirt enlightenments made a large difference to idle CPU usage consumption
+* libvirt enlightenments made a large difference to idle CPU usage consumption; I can't actually possibly overstress this. I played through the whole of the Witcher 3 without the relevant enlightenments enabled, and now when I used my Windows VM it feels like a whole new beast. There is a night and day difference. Don't fuck up/neglect your timer system.
 
 # Introduction
 
@@ -416,4 +416,37 @@ Hours spent tinkering with passthrough to date: ~30 hours
 
 # What happens when you get things wrong
 
-Stuttering and popping like you have never seen before. I am impressed by people who record and investigate IRQ behavior and interrupt handling; I personally have yet to get a firm grip on what the reality of this looks like with my current configuration. I have gamed on some incredibly poxy Windows installs now, tolerating shit no functional adult should tolerate.
+* Stuttering and popping like you have never seen before. I am impressed by people who record and investigate IRQ behavior and interrupt handling; I personally have yet to get a firm grip on what the reality of this looks like with my current configuration. I have gamed on some incredibly poxy Windows installs now, tolerating shit no functional adult should tolerate.
+
+# Gotchas
+
+It took me longer than it should have to fully appreciate the difference between:
+
+* virsh dumpxml --inactive CompromisedBeast
+    * matches your formal explicit config
+* virsh dumpxml CompromisedBeast
+    * matches what emerges from your formal config
+
+I mistakenly assumed that the difference was due to me running as a regular user vs editing as root, and there were cached additional changes to the fundemental configuration. This resulted in me chasing my tail for a bit looking for a non-existent second shooter. There was only me, being a muppet.
+
+# Tips
+
+## find out which processes are using yuge pages
+
+```
+awk  '/AnonHugePages/ { if($2>4){print FILENAME " " $0; system("ps -fp " gensub(/.*\/([0-9]+).*/, "\\1", "g", FILENAME))}}' /proc/*/smaps
+```
+
+# Resources
+
+You will find yourself googling a lot, depending on the insights and generosity of strangers; I didn't track every resource I hit, here are some:
+
+* [https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/virtualization_tuning_and_optimization_guide/index](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/virtualization_tuning_and_optimization_guide/index)
+* [https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#Video_card_driver_virtualisation_detection](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#Video_card_driver_virtualisation_detection)
+* [https://serverfault.com/questions/380935/how-to-ban-hardware-interrupts-with-irqbalance-banned-cpus-on-ubuntu](https://serverfault.com/questions/380935/how-to-ban-hardware-interrupts-with-irqbalance-banned-cpus-on-ubuntu)
+* [https://github.com/kubevirt/kubevirt/issues/1919](https://github.com/kubevirt/kubevirt/issues/1919)
+* [https://bugzilla.redhat.com/show_bug.cgi?id=1056205](https://bugzilla.redhat.com/show_bug.cgi?id=1056205)
+* [https://blog.wikichoon.com/2014/07/enabling-hyper-v-enlightenments-with-kvm.html](https://blog.wikichoon.com/2014/07/enabling-hyper-v-enlightenments-with-kvm.html)
+* [https://www.reddit.com/r/VFIO/comments/fovu39/iommu_avic_in_linux_kernel_56_boosts_pci_device/](https://www.reddit.com/r/VFIO/comments/fovu39/iommu_avic_in_linux_kernel_56_boosts_pci_device/)
+* [https://lore.kernel.org/patchwork/patch/1147376/](https://lore.kernel.org/patchwork/patch/1147376/)
+* [https://pastebin.com/USMQT7sy](https://pastebin.com/USMQT7sy)
