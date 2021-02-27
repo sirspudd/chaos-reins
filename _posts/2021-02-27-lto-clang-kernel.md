@@ -21,7 +21,7 @@ make LLVM=1 LLVM_IAS=1
 
 in order for the clang lto options to be populated in menuconfig.
 
-This is well covered in the kernel (llvm)[https://www.kernel.org/doc/html/latest/kbuild/llvm.html] when you eventually find them. Google did not actually bring them to bare until I stubbed my toe on the page in the tree.
+This is well covered in the kernel [llvm](https://www.kernel.org/doc/html/latest/kbuild/llvm.html) when you eventually find them. Google did not actually bring them to bare until I stubbed my toe on the page in the tree.
 
 Having changed my make calls as indicated above, I could enable:
 
