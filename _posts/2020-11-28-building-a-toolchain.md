@@ -1,7 +1,7 @@
 ---
 title:  "Building a toolchain using crosstool-ng"
 date:   2020-11-28 12:10:59 -0700
-published: true
+published: false
 tags: [embedded, linux, oss]
 ---
 
