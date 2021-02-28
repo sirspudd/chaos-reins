@@ -19,7 +19,7 @@ I had historically been using:
 make CC=clang HOSTCC=clang
 ```
 
-needs to become
+this needed to become
 
 ```
 make LLVM=1 LLVM_IAS=1
