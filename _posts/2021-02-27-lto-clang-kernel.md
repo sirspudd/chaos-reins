@@ -1,5 +1,5 @@
 ---
-title:  "Clang LTO enablement"
+title:  "Linux Clang LTO enablement is upon us"
 date:   2021-02-26 12:10:59 -0700
 published: true
 tags: [clang, llvm, linux, oss, lto]
