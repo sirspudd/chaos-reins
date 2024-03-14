@@ -17,9 +17,11 @@ SDKPATH is a pathological variable. It needs to be a static string. If you want 
 
 Yoe is an excellent reference distro.
 
-## Blather
+## The chase
 
 I tend to keep the yocto I produce up to date, so at the start (up through the middle) of a release cycle I will update yocto distros to drink the coalesced fixes/hotness from upstream. At some point, I became aware that simple leaf node changes were resulting in all of Qt being rebuilt. I don't actually increment build versions when testing, so this only manifested once it hit our build server, and that is beast enough, and yocto verbose enough that it was easy to overlook the rebuilding of the complete dependency graph from qtbase-native onwards. I took several stabs at trying to establish what could possibly be causing this, grepping in meta-qt for DISTRO_VERSION related considerations. I actually attempted this debugging on a couple occasions, never made much headway and lived with 40 min warm builds on a modern EPYC server.
+
+Googling shed no light.
 
 This issue was not manifest in reference distros like [yoe](https://www.yoedistro.org/). What gives?
 
@@ -36,3 +38,5 @@ I don't know why only Qt is hit by this
 ```
 
 Maybe this is responsible?
+
+In any case, our build time went from 40min for a warm build to 12 minutes for a warm build. This kind of difference makes a hell of a difference to iterative development
