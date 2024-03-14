@@ -13,7 +13,7 @@ I am responsible for a yocto distro which targets 2 custom devices. For the most
 
 ## TL&DR
 
-SDKPATH is a pathological variable. It needs to be a static string. If you want to set your SDKPATH, you need to see SDKPATHINSTALL to something reasonable, which normally contains [DISTRO,SDK]_VERSION in the path. This changed upstream, and anyone setting this value is going to be ruing their life and the limits of their build server.
+SDKPATH is a pathological variable. It needs to be a static string. If you want to set your SDKPATH, you need to set SDKPATHINSTALL to something reasonable, which normally contains [DISTRO,SDK]_VERSION in the path. This changed upstream, and anyone setting this value is going to be ruing their life and the limits of their build server.
 
 Yoe is an excellent reference distro.
 
