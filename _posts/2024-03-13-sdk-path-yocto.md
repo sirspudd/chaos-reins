@@ -13,7 +13,7 @@ I am responsible for a yocto distro which targets 2 custom devices. For the most
 
 ## TL&DR
 
-SDKPATH is a pathological variable. It needs to be a static string. If you want to set your SDKPATH, you need to set SDKPATHINSTALL to something reasonable, which normally contains [DISTRO,SDK]_VERSION in the path. This changed upstream, and anyone setting this value is going to be ruing their life and the limits of their build server.
+SDKPATH is a pathological variable. It needs to be a static string. If you want to set your SDKPATH, you need to set SDKPATHINSTALL to something reasonable, which normally contains [DISTRO,SDK]_VERSION in the path. This affects qtbase and everything downstream of it. This changed upstream, and anyone setting this value is going to be ruing their life decisions that brought them to this point and the limits of their build server.
 
 Yoe is an excellent reference distro.
 
@@ -25,11 +25,11 @@ Googling shed no light.
 
 This issue was not manifest in reference distros like [yoe](https://www.yoedistro.org/). What gives?
 
-Well, it turns out DISTRO_VERSION was not actually the issue; in my distro I set SDK_VERSION = DISTRO_VERSION, and it was this setting of this SDK_VERSION which was driving the rebuilds. First I tried setting SDK_VERSION to a fixed value for non class-sdk components, since SDK_VERSION is used in the SDK path. This resulted in the most perplexing artifact generation I have seen in 7 years of working in yocto land. The resulting images contain binaries/artifacts from weeks/months of sstate cache. It is wicked, you will see the phantom of old 
+Well, it turns out DISTRO_VERSION was not actually the issue; in my distro I set SDK_VERSION = DISTRO_VERSION, and it was this setting of this SDK_VERSION which was driving the rebuilds. First I tried setting SDK_VERSION to a fixed value for non class-sdk components, since SDK_VERSION is used in the SDK path. This resulted in the most perplexing artifact generation I have seen in 7 years of working in yocto land. The resulting images contain binaries/artifacts from weeks/months of sstate cache. It is wicked, you will see the phantoms of old builds/issues you murdered weeks/months prior rewalk the earth.
 
- My then attempted to isolate this involved hardcoding SDK_VERSION in qtbase. This succeeded! I had to set SDK_VERSION for class-target and class-native, not class-sdk. And that appeared to work. Now that I had a solution, I went back and looked at yoe again in order to substantiate/communicate my discovery of a work around. That was when I noticed that they set SDKPATHINSTALL, where as I was setting SDKPATH for our distro. This value had not changed, it had not previously caused an issue, but lo and behold when I removed my SDK_VERSION hack, the issue remained solved.
+Ok, less general solution, lets hardcode SDK_VERSION in qtbase. This succeeded! I had to set SDK_VERSION for class-target and class-native, not class-sdk. And that appeared to work. Now that I had a solution, I went back and looked at yoe again in order to substantiate/communicate my discovery of a work around. That was when I noticed that they set SDKPATHINSTALL, where as I was setting SDKPATH for our distro. This value had not changed, it had not previously caused an issue, but lo and behold when I removed my SDK_VERSION hack, the issue remained solved.
 
-I don't know why only Qt is hit by this
+I don't know why only Qt is hit by this: maybe this snippet is responsible?
 
 ```
     # resolve absolute paths at runtime
@@ -37,6 +37,5 @@ I don't know why only Qt is hit by this
         ${SDK_OUTPUT}${NATIVE_SYSROOT}/usr/share/cmake/Qt6Toolchain.cmake
 ```
 
-Maybe this is responsible?
 
-In any case, our build time went from 40min for a warm build to 12 minutes for a warm build. This kind of difference makes a hell of a difference to iterative development
+In any case, our build time went from 40 min for a warm build to 12 min for a warm build. This kind of difference makes a hell of a difference to iterative development
