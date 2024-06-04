@@ -65,7 +65,7 @@ I grabbed the sample app, changed the signing attributes to reflect my user, cli
 
 I installed fedora as per usual using their aarch64 installer.
 
-Benchmarking output: make  3242.05s user 338.41s system 817% cpu 7:17.99 total
+Benchmark output: make  3242.05s user 338.41s system 817% cpu 7:17.99 total
 
 So using the sample app for the Apple Virtualization APIs, I was able to halve the compile time of the primary code base I work against. I have to say it feels incredibly empowering to be running Linux in your own VM app which you can modify to your needs.
 
@@ -229,6 +229,26 @@ Package Power: 31067 mW
 
 I would be a liar if I did not report increased instability when using GuiLinuxVirtualMachineSampleApp as my primary virtualized container; I have to click the stop button in xcode, restart it and fsck.ext4 my root drive pretty much once per session every time I use it. That said, I am not prepared to halve my performance by going back to Parallels. YOLO.
 
+## Fedora under UTM
+
+UTM now has support for Apple's build in virtualization framework:
+
+This [guide](https://mybyways.com/blog/using-rosetta-in-a-utm-linux-vm-with-docker-on-apple-silicon) steps through it though I went with the Fedora 39 installer (40 was still in the works).
+
+The whole process was pretty idiot proof, and the only apparent drawback to Apple's native virtualization is that you will not get any graphical acceleration. Not a big deal if your primary use case is compilation for a target.
+
+I discovered that "/usr/sbin/update-binfmts" is actually a debianism, apparently uninstallable under Fedora or Arch. Luckily someone in the UTM forums has a clue and posted this [solution](https://github.com/utmapp/UTM/discussions/4601)
+
+```
+echo ":rosetta:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00:\xff\xff\xff\xff\xff\xfe\xfe\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/media/rosetta/rosetta:CF" > /proc/sys/fs/binfmt_misc/register
+```
+
+which relies on the same path as provisioned in the aforementioned guide.
+
+This enabled me to test cross compilation for the ARM targets at my disposal using my existing amd64 artifacts.
+
+Benchmark output: make  7498.80s user 429.28s system 748% cpu 17:38.51 total
+
 ## Building a Yocto OS on an aarch64 host
 
 On a positive note, it was comparatively trivial to get Yocto spitting out SDKs for an aarch64 host. The only real adjustment I had to make was within our own software realm which assumed an intel host and an ARM target. It speaks volumes about the thoroughness and competence across the community that everything else largely worked out the box. (We also thankfully don't use custom allocators like jemalloc and other pieces of code which were/are known to blow up with 16kb page sizes)
@@ -250,7 +270,7 @@ there is no real point enumerating these things; this list is not complete. Let 
 
 ## Metal and only metal
 
-This hardware is lovely; I consider it an affront that Metal is the only game in town. Ongoing Vulkan and opengl support would not bankrupt Apple and would feel less like vendor lock in.`:w
+This hardware is lovely; I consider it an affront that Metal is the only game in town. Ongoing Vulkan and opengl support would not bankrupt Apple and would feel less like vendor lock in.
 
 ## Emulating AMD64 OSes
 
