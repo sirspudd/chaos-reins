@@ -57,9 +57,7 @@ Benchmark output: make  6593.12s user 739.22s system 720% cpu 16:57.13 total
 
 ## Fedora running under a modified GuiLinuxVirtualMachineSampleApp
 
-Apple now natively support virtualization
-
-[https://developer.apple.com/documentation/virtualization/running_gui_linux_in_a_virtual_machine_on_a_mac](https://developer.apple.com/documentation/virtualization/running_gui_linux_in_a_virtual_machine_on_a_mac)
+Apple now natively support [virtualization](https://developer.apple.com/documentation/virtualization/running_gui_linux_in_a_virtual_machine_on_a_mac)
 
 I grabbed the sample app, changed the signing attributes to reflect my user, clicked the play button and I was away. (The first time it actually failed to generate a machine identifier and some other things, but a fresh restart (deleting the partial project) resolved all woes). I then modified the project to pass through all cores, make the disk substantially larger and pass through 24G of ram. The code is very human readable; I am impressed.
 
