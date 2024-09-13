@@ -1,11 +1,22 @@
 ---
 layout: post
-title: Get rid of the KDE 6 prerelease banner
+title: Get rid of the KDE 6(.2) prerelease banner
 subtitle: OLED friendly KDE ahoy
 date:   2023-12-02
 published: true
 tags: [KDE 6, Qt, Beta]
 ---
+
+# Update 2024-09-13
+
+Just updated to Plasma 6.2 and the banner is back. Turns out they inverted the boolean and did not migrate over existing settings opting out of the banner
+
+```
+└─[0] <> cat /home/sirspudd/.config/kdedefaults/kdeglobals
+[General]
+ColorScheme=BreezeDark
+ShowDesktopPreviewBanner=false
+```
 
 # KDE 6 installation/adoption
 
@@ -76,7 +87,7 @@ QString DesktopView::previewBannerTitle() const
     }
 ```
 
-so we can gloriously removed this crud with
+so we can gloriously removed this crud (pre-6.2) with
 
 ```
 [0] <git:(master cf62a04f78) > cat /home/sirspudd/.config/kdedefaults/kdeglobals
